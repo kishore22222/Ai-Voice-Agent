@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(cookieParser())
 const privateCors = cors({
     origin:[
-        "http://localhost:5173"
+        "https://shifra-d82z.onrender.com"
     ],
     credentials:true
 });
