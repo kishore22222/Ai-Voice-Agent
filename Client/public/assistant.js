@@ -9,7 +9,7 @@
 
     const link = document.createElement("link")
     link.rel = "stylesheet"
-    link.href = "http://localhost:5173/assistant.css"
+    link.href = "https://shifra-d82z.onrender.com/assistant.css"
     document.head.appendChild(link)
 
     const popup = document.createElement("div")
@@ -36,7 +36,7 @@
       </div>
       <div class="shifra-bottom">
         <button class="shifra-mic">
-          <img src="http://localhost:5173/mic.svg" alt="mic" class="shifra-mic-icon"/>
+          <img src="https://shifra-d82z.onrender.com/mic.svg" alt="mic" class="shifra-mic-icon"/>
         </button>
       </div>
     </div>
@@ -45,7 +45,7 @@
 
     const button = document.createElement("button")
     button.className = `shifra-btn theme-${theme}`
-    button.innerHTML = `<img src="http://localhost:5173/logo.png" alt="logo"/>`
+    button.innerHTML = `<img src="https://shifra-d82z.onrender.com/logo.png" alt="logo"/>`
     document.body.appendChild(button)
 
     let open = false
