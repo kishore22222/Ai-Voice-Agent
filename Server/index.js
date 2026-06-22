@@ -16,7 +16,8 @@ app.use(express.json())
 app.use(cookieParser())
 const privateCors = cors({
     origin:[
-        "https://shifra-d82z.onrender.com"
+        "https://shifra-d82z.onrender.com",
+        "https://ai-voice-agentserver.onrender.com"
     ],
     credentials:true
 });
