@@ -13,7 +13,7 @@ import Billing from './Pages/Billing'
 import {Toaster} from 'react-hot-toast'
 
 
-export const ServerUrl ="http://localhost:8000/" 
+export const ServerUrl ="https://ai-voice-agentserver.onrender.com" 
 export const CLIENT_URL="http://localhost:5173"
 
 function App() {
