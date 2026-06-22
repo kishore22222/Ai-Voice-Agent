@@ -14,7 +14,7 @@ import {Toaster} from 'react-hot-toast'
 
 
 export const ServerUrl ="https://ai-voice-agentserver.onrender.com" 
-export const CLIENT_URL="http://localhost:5173"
+export const CLIENT_URL="https://shifra-d82z.onrender.com"
 
 function App() {
   const [user,setUser] =  useState(null)
