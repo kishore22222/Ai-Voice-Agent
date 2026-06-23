@@ -1,4 +1,4 @@
-const Gemini_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent"
+const Gemini_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent"
 
 export const generateGeminiResponse = async ({
     prompt,
@@ -9,13 +9,17 @@ export const generateGeminiResponse = async ({
         if (!apiKey) {
             throw new Error("Gemini API key missing")
         }
-
         const response = await fetch(`${Gemini_URL}?key=${apiKey}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
+                system_instruction: {
+                    parts: [
+                        { text: "You are a helpful AI voice assistant. Answer all questions clearly and accurately, including general knowledge. Keep responses short and natural for voice playback." }
+                    ]
+                },
                 contents: [
                     {
                         parts: [
