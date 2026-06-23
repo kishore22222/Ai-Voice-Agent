@@ -9,7 +9,6 @@ export const getAssistantConfig = async (req, res) => {
             return res.status(404).json({ message: "failed to get user" })
         }
         return res.status(200).json({ message: "Assistant config data", user })
-
     } catch (error) {
         return res.status(500).json({ message: `Assistant config failed ${error}` })
     }
@@ -46,7 +45,6 @@ export const askAssistant = async (req, res) => {
 
         if (user.enableNavigation) {
             const navigationWords = ["open", "go", "start", "show", "navigate", "take me"]
-
             const wantsNavigation = navigationWords.some((word) =>
                 cleanMessage.startsWith(word)
             )
@@ -76,20 +74,17 @@ export const askAssistant = async (req, res) => {
         }
 
         const prompt = `
-          You are ${user.assistantName}.
-
-          Business Name: ${user.businessName}
+          You are ${user.assistantName}, a smart voice assistant for ${user.businessName}.
           Business Type: ${user.businessType}
           Business Description: ${user.businessDescription}
           Assistant Tone: ${user.tone}
 
           Rules:
-          - Keep replies under 15 words
-          - Give fast direct responses
-          - Talk naturally
+          - Answer ALL questions — business-related or general knowledge
+          - Keep replies under 20 words
+          - Give fast, direct, natural responses
           - Behave like a smart voice assistant
-          - Avoid long explanations
-          - Keep responses short for quick voice playback
+          - Never say you can't answer something
 
           User Question: ${message}
         `
@@ -111,7 +106,7 @@ export const askAssistant = async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error)
+        console.error("Ask assistant error:", error)
         return res.status(500).json({
             success: false,
             message: "Assistant AI error",
