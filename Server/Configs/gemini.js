@@ -1,5 +1,4 @@
-const Gemini_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent"
-
+const Gemini_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent"
 export const generateGeminiResponse = async ({
     prompt,
     apiKey,
@@ -15,11 +14,6 @@ export const generateGeminiResponse = async ({
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                system_instruction: {
-                    parts: [
-                        { text: "You are a helpful AI voice assistant. Answer all questions clearly and accurately, including general knowledge. Keep responses short and natural for voice playback." }
-                    ]
-                },
                 contents: [
                     {
                         parts: [
@@ -29,7 +23,6 @@ export const generateGeminiResponse = async ({
                 ]
             })
         })
-
         if (!response.ok) {
             if (response.status === 400 || response.status === 401) {
                 user.geminiStatus = "invalid"
@@ -42,19 +35,14 @@ export const generateGeminiResponse = async ({
             const err = await response.text()
             throw new Error(err)
         }
-
         user.geminiStatus = "active"
         await user.save()
-
         const data = await response.json()
         const text = data.candidates?.[0]?.content?.parts?.[0]?.text
-
         if (!text) {
             throw new Error("No text returned from Gemini")
         }
-
         return text.trim()
-
     } catch (error) {
         console.error("Gemini fetch error:", error.message)
         throw new Error("Gemini API fetch failed")
