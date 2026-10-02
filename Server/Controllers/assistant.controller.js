@@ -27,7 +27,7 @@ export const askAssistant = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: "User is not found" })
         }
-
+ 
         if (!user.geminiApiKey) {
             return res.status(400).json({ success: false, message: "Gemini API key is not added" })
         }
@@ -76,22 +76,33 @@ export const askAssistant = async (req, res) => {
         }
 
         const prompt = `
-          You are ${user.assistantName}.
+You are ${user.assistantName}.
 
-          Business Name: ${user.businessName}
-          Business Type: ${user.businessType}
-          Business Description: ${user.businessDescription}
-          Assistant Tone: ${user.tone}
+Business Name: ${user.businessName}
+Business Type: ${user.businessType}
+Business Description: ${user.businessDescription}
+Assistant Tone: ${user.tone}
 
-          Rules:
-          - Keep replies under 15 words
-          - Give fast direct responses
-          - Talk naturally
-          - Behave like a smart voice assistant
-          - Avoid long explanations
-          - Keep responses short for quick voice playback
+Rules:
+- ONLY answer questions about this business, its services, products, or operations
+- If a question is not related to this business, politely decline and redirect to business topics
+- Keep replies under 15 words
+- Give fast direct responses
+- Talk naturally
+- Behave like a smart voice assistant
+- Avoid long explanations
+- Keep responses short for quick voice playback
 
-          User Question: ${message}
+Important: You MUST refuse to answer questions about topics unrelated to ${user.businessName}. Examples of off-topic questions you should decline:
+- Questions about celebrities, actors, or entertainment
+- General knowledge questions (history, geography, science facts)
+- Personal advice or life coaching
+- Politics, religion, or controversial topics
+- Sports, games, or hobbies unrelated to the business
+
+For off-topic questions, respond with: "I'm here to help with questions about ${user.businessName}. How can I assist?"
+
+User Question: ${message}
         `
 
         const aiResponse = await generateGeminiResponse({
