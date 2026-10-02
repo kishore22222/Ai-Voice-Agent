@@ -1,4 +1,4 @@
-const Gemini_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent"
+const Gemini_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent"
 export const generateGeminiResponse = async ({
     prompt,
     apiKey,
